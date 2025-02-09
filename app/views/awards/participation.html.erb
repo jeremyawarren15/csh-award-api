@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <style type="text/css">
+    @import url('https://themes.googleusercontent.com/fonts/kit=hh9VFM0qOK4TrLidDd__UvesZW2xOQ-xsNqO47m55DA');
+  </style>
+  <style>
+    /* CSS Reset */
+    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+      font: inherit;
+      vertical-align: baseline;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ffffff;
+      font-family: Arial, sans-serif;
+    }
+
+    .certificate-container {
+      text-align: center;
+    }
+
+    @page {
+      size: letter landscape;
+      margin: 1in
+    }
+  </style>
+</head>
+
+<body style="display: flex; flex-direction: column; align-items: center; font-family: 'Book Antiqua';">
+  <div class="certificate-container" style="page-break-after: always;">
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <% if logo.present? %>
+        <img src="data:image/jpeg;base64,<%= logo %>" alt="School Logo" style="width: 100px; margin-right: 10px;">
+      <% end %>
+      <h2 style="font-size: 36pt;"><%= chapterName %></h2>
+    </div>
+    <p style="font-size: 22pt;">We proudly recognize</p>
+    <h1 style="font-size: 36pt; font-style: italic"><%= student_name %></h1>
+    <p style="font-size: 22pt;">the successful completion of</p>
+    <h1 style="font-size: 36pt; font-style: italic">Tour <%= tour %> Classical Studies</h1>
+    <p style="font-size: 22pt;">Presented on the <%= showcaseDate %>.</p>
+    <hr style="width: 400px; margin-top: 3rem;" />
+    <p style="font-size: 16pt"><%= directorsName %>, Director</p>
+  </div>
+</body>
+</html>

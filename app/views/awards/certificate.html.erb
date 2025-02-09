@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>CSH Awards</title>
+  <style type="text/css">
+    @import url('https://themes.googleusercontent.com/fonts/css?kit=hh9VFM0qOK4TrLidDd__UvesZW2xOQ-xsNqO47m55DA');
+  </style>
+  <style>
+    /* CSS Reset */
+    html, body, div, span, applet, object, iframe, h1, h2, h3, h4, h5, h6, p, blockquote, pre, a, abbr, acronym, address, big, cite, code, del, dfn, em, img, ins, kbd, q, s, samp, small, strike, strong, sub, sup, tt, var, b, u, i, center, dl, dt, dd, ol, ul, li, fieldset, form, label, legend, table, caption, tbody, tfoot, thead, tr, th, td, article, aside, canvas, details, embed, figure, figcaption, footer, header, hgroup, menu, nav, output, ruby, section, summary, time, mark, audio, video {
+      margin: 0;
+      padding: 0;
+      border: 0;
+      font-size: 100%;
+      font: inherit;
+      vertical-align: baseline;
+    }
+
+    html, body {
+      height: 100%;
+    }
+
+    body {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: #ffffff;
+      font-family: Arial, sans-serif;
+    }
+
+    .certificate-container {
+      text-align: center;
+    }
+
+    @page {
+      size: letter landscape;
+      margin: 1in
+    }
+
+    .certificate {
+      width: 279.4mm; /* Letter width in landscape */
+      height: 215.9mm; /* Letter height in landscape */
+      position: relative;
+      background: white;
+      page-break-after: always;
+    }
+
+    .certificate:last-child {
+      page-break-after: avoid;
+    }
+
+    .content {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      text-align: center;
+      width: 90%;
+    }
+
+    .border {
+      position: absolute;
+      top: 25mm;
+      left: 25mm;
+      right: 25mm;
+      bottom: 25mm;
+      border: 3px double #8B4513;
+      border-radius: 5px;
+    }
+
+    .title {
+      color: #8B4513;
+      font-size: 48px;
+      margin-bottom: 20px;
+      font-weight: bold;
+    }
+
+    .subtitle {
+      font-size: 24px;
+      color: #666;
+      margin: 15px 0;
+    }
+
+    .name {
+      font-size: 42px;
+      color: #000;
+      margin: 30px 0;
+      font-family: "Brush Script MT", cursive;
+    }
+
+    .date {
+      font-size: 18px;
+      color: #666;
+      margin-top: 40px;
+    }
+
+    .signature {
+      margin-top: 60px;
+    }
+
+    .signature-line {
+      width: 200px;
+      border-top: 1px solid #000;
+      margin: 10px auto;
+    }
+
+    .director {
+      font-size: 18px;
+      color: #333;
+    }
+  </style>
+</head>
+<body style="display: flex; flex-direction: column; align-items: center; font-family: 'Book Antiqua';">
+  <div class="certificate-container" style="page-break-after: always;">
+    <div style="display: flex; align-items: center; justify-content: center;">
+      <% if logo.present? %>
+        <img src="data:image/jpeg;base64,<%= logo %>" alt="School Logo" style="width: 100px; margin-right: 10px;">
+      <% end %>
+      <h2 style="font-size: 36pt;"><%= chapterName %></h2>
+    </div>
+    <p style="font-size: 22pt;">We proudly award</p>
+    <h1 style="font-size: 36pt; font-style: italic"><%= student_name %></h1>
+    <p style="font-size: 22pt;">the title of</p>
+    <h1 style="font-size: 36pt; font-style: italic"><%= title %></h1>
+    <p style="font-size: 21pt;">
+      For successfully memorizing
+    </p>
+    <div style="font-size: 20pt; font-style:italic;"><%=
+      if subjects.include?(',')
+        # If there are multiple subjects, format with Oxford comma and '&'
+        subjects.sub(/, ([^,]*)$/, ' & \1')
+      else
+        # If there's only one subject, use it as is
+        subjects
+      end
+    %></div>
+    <p style="font-size: 21pt;">
+      from the Tour <%= tour %> studies during the <%= "the #{year} school year" %>:
+    </p>
+    <p style="font-size: 22pt;">Presented on the <%= showcaseDate %>.</p>
+    <hr style="width: 400px; margin-top: 3rem;" />
+    <p style="font-size: 16pt"><%= directorsName %>, Director</p>
+  </div>
+</body>
+</html>
