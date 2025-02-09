@@ -148,18 +148,31 @@ class AwardGeneratorService
     certificates = []
     @csv_data.each do |student|
       completed_subjects = SUBJECTS.select { |subject| student[subject]&.upcase == 'TRUE' }
-      subjects_text = completed_subjects.join(', ').gsub('_', ' ')
 
-      SUBJECTS.each do |subject|
-        next unless student[subject]&.upcase == 'TRUE'
-
+      if completed_subjects.empty?
+        # Generate participation certificate
+        certificates << ActionController::Base.new.render_to_string(
+          template: "awards/participation",
+          layout: false,
+          locals: {
+            logo: load_logo_base64,
+            student_name: student['Name'] || student['name'],
+            tour: @tour,
+            year: @year,
+            showcaseDate: format_date(@showcase_date),
+            directorsName: @director_name,
+            chapterName: @chapter_name
+          }
+        )
+      else
+        # Generate achievement certificate
+        subjects_text = completed_subjects.join(', ').gsub('_', ' ')
         certificates << ActionController::Base.new.render_to_string(
           template: "awards/certificate",
           layout: false,
           locals: {
             logo: load_logo_base64,
             student_name: student['Name'] || student['name'],
-            subject: subject.gsub('_', ' '),
             tour: @tour,
             year: @year,
             showcaseDate: format_date(@showcase_date),
